@@ -133,5 +133,22 @@ namespace GitCommandsTests
         {
             Assert.AreEqual(expected, str.SubstringAfterLast(s));
         }
+
+        // Arrange
+        [TestCase(null, "other", "")]
+        [TestCase("a", null, "")]
+        [TestCase("a", "", "")]
+        [TestCase("", "a", "")]
+        [TestCase("other", "other", "other")]
+        [TestCase("otherr", "other", "other")]
+        [TestCase("other", "otherr", "other")]
+        public void CommonPrefix_(string? s, string? other, string? expected)
+        {
+            // Act
+            string? commonPrefix = s.CommonPrefix(other);
+
+            // Assert
+            Assert.AreEqual(expected, commonPrefix);
+        }
     }
 }

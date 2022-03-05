@@ -96,5 +96,19 @@ namespace GitExtUtilsTests
         {
             Assert.Throws<ArgumentNullException>(() => _ = new LazyStringSplit(null!, ' ', StringSplitOptions.RemoveEmptyEntries));
         }
+
+        // Arrange
+        [TestCase("refs/heads/develop", '/', "develop")]
+        [TestCase("refs/", '/', "")]
+        [TestCase("refs", '/', "refs")]
+        [TestCase("", '/', "")]
+        public void LastOrDefault_(string name, char separator, string? expected)
+        {
+            // Act
+            string? lastOrDefault = name.LazySplit(separator).LastOrDefault();
+
+            // Assert
+            Assert.AreEqual(expected, lastOrDefault);
+        }
     }
 }
